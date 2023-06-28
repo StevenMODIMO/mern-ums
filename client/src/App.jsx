@@ -1,7 +1,16 @@
-export default function App() {
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { useAuth } from "./context/AuthContext"
+import Navbar from "./components/Navbar"
+
+function App() {
+  const { user } = useAuth()
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className="text-black-400 font-mono text-2xl">
+      <BrowserRouter>
+      <Navbar />
+      </BrowserRouter>
+    </div>
   )
 }
+
+export default App
