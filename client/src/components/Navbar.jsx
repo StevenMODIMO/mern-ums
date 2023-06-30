@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { LiaUniversitySolid, LiaHourglassStartSolid } from "react-icons/lia";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdOutlineClass, MdSlideshow } from "react-icons/md";
@@ -17,11 +18,13 @@ import Info from "./Info";
 export default function Navbar() {
   const [show, setShow] = useState(false);
   const togglePanel = () => setShow(!show);
+  const toggle = () => setShow(false)
   const [about, setAbout] = useState(false);
   const [programs, setPrograms] = useState(false);
   const [enroll, setEnroll] = useState(false);
   const [contact, setContacts] = useState(false);
   const [system, setSystem] = useState(false);
+  const closeEnroll = () => setEnroll(false)
   return (
     <main className="lg:flex justify-between lg:mt-5">
       <header
@@ -31,13 +34,15 @@ export default function Navbar() {
             : "flex justify-between bg-black border-b-2 border-red-900 transition-all duration-500 ease-in-out"
         }
       >
-        <div className="flex text-4xl text-red-900">
-          <LiaUniversitySolid className="mt-1 lg:text-7xl" />
-          <h1 className="font-bold lg:hidden">UMS</h1>
-          <h1 className="hidden lg:block text-xs font-bold w-20 mt-3">
-            University Management System
-          </h1>
-        </div>
+        <NavLink to="/">
+          <div className="flex text-4xl text-red-900">
+            <LiaUniversitySolid className="mt-1 lg:text-7xl" />
+            <h1 className="font-bold lg:hidden">UMS</h1>
+            <h1 className="hidden lg:block text-xs font-bold w-20 mt-3">
+              University Management System
+            </h1>
+          </div>
+        </NavLink>
         {!show ? (
           <FaBars
             onClick={togglePanel}
@@ -75,7 +80,13 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={about ? "block bg-white p-4 lg:absolute lg:drop-shadow-2xl shadow-inner lg:mr-4 p-6 lg:mt-5" : "hidden"}>
+            <div
+              className={
+                about
+                  ? "block bg-white p-4 lg:absolute lg:drop-shadow-2xl shadow-inner lg:mr-4 p-6 lg:mt-5"
+                  : "hidden"
+              }
+            >
               <Info
                 title="About Us"
                 desc_one="UMS (University Management System) is a web based sytem that showcases how a university website works from a real life perspective"
@@ -103,15 +114,20 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={programs ? "block bg-white lg:absolute lg:drop-shadow-2xl shadow-inner p-8 lg:mt-5" : "hidden"}>
+            <div
+              className={
+                programs
+                  ? "block bg-white lg:absolute lg:drop-shadow-2xl shadow-inner p-8 lg:mt-5"
+                  : "hidden"
+              }
+            >
               <Info title="Programmes Offered" option={true} />
             </div>
           </main>
           <main>
             <section
               onClick={() => setEnroll(!enroll)}
-              onMouseEnter={() => setEnroll(true)}
-              onMouseLeave={() => setEnroll(false)}
+              onMouseEnter={() => setEnroll(!enroll)}
               className="flex gap-2 ml-3 pt-2 lg:hover:border-b-4 border-red-900 gap-1 cursor-pointer  transition-all duration-100 ease-in-out"
             >
               <LiaHourglassStartSolid className="lg:mt-1" />
@@ -124,12 +140,19 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={enroll ? "block bg-white p-2 lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-8 lg:mr-6 lg:mt-5" : "hidden"}>
+            <div
+              className={
+                enroll
+                  ? "block bg-white p-2 lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-8 lg:mr-6 lg:mt-5"
+                  : "hidden"
+              }
+            >
               <Info
                 title="Enroll Today"
                 desc_one="Our enrollment is always open for the first 100 students to apply.Then it will be closed until further notice."
                 button="Enroll Now"
                 enroll={true}
+                onClick={closeEnroll}
               />
             </div>
           </main>
@@ -150,7 +173,13 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={contact ? "block bg-white lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-3 lg:mr-2" : "hidden"}>
+            <div
+              className={
+                contact
+                  ? "block bg-white lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-3 lg:mr-2"
+                  : "hidden"
+              }
+            >
               <Info title="Contact Us!!" contact={true} />
             </div>
           </main>
@@ -171,7 +200,13 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={system ? "block bg-white p-6 lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-10 lg:mr-48 lg:ml-96 lg:w-fit lg:left-0 lg:mt-5" : "hidden"}>
+            <div
+              className={
+                system
+                  ? "block bg-white p-6 lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-10 lg:mr-48 lg:ml-96 lg:w-fit lg:left-0 lg:mt-5"
+                  : "hidden"
+              }
+            >
               <Info
                 title="Our System"
                 desc_one="UMS is an easy to use platform.When you enroll you will go through a series of questions, then once you pass them you will be enrolled as a student.You can also choose the role of a lecture to see how it works."

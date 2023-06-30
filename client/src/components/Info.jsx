@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { GrCloudComputer } from "react-icons/gr";
 import { MdOutlineArchitecture, MdOutlineRestartAlt } from "react-icons/md";
 import { VscLaw } from "react-icons/vsc";
@@ -16,6 +17,7 @@ export default function Info({
   button,
   contact,
   enroll,
+  onClick,
 }) {
   return (
     <div className="lg:p-2">
@@ -55,12 +57,13 @@ export default function Info({
           </section>
         </div>
       )}
-      {enroll && <main className="flex justify-center p-1">
+      {enroll && <NavLink to="/enroll" onClick={onClick}>
+        <main className="flex justify-center p-1">
         <button className="bg-red-900 text-black p-1 flex">
           <MdOutlineRestartAlt className="mt-1" />
           {button}
         </button>
-      </main>}
+      </main></NavLink>}
 
       {contact && (
         <div>
