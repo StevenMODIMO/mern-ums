@@ -6,7 +6,6 @@ import { IoMdAdd } from "react-icons/io";
 import { AiOutlineMinus } from "react-icons/ai";
 import {
   BsInfoCircle,
-  BsCalendar3Event,
   BsFacebook,
   BsTwitter,
   BsInstagram,
@@ -21,7 +20,6 @@ export default function Navbar() {
   const [about, setAbout] = useState(false);
   const [programs, setPrograms] = useState(false);
   const [enroll, setEnroll] = useState(false);
-  const [news, setNews] = useState(false);
   const [contact, setContacts] = useState(false);
   const [system, setSystem] = useState(false);
   return (
@@ -56,7 +54,7 @@ export default function Navbar() {
         className={
           !show
             ? "bg-black text-red-900 h-0 overflow-hidden transition-all duration-500 ease-in-out lg:overflow-visible"
-            : "bg-black text-red-900 h-screen transition-all duration-500 ease-in-out md:text-xl"
+            : "bg-black text-red-900 h-fit transition-all duration-500 ease-in-out md:text-xl"
         }
       >
         <div className="text-lg sm:text-xl lg:flex gap-3 lg:text-lg">
@@ -68,7 +66,7 @@ export default function Navbar() {
               className="flex gap-2 ml-3 pt-2 lg:hover:border-b-4 border-red-900 gap-1 cursor-pointer transition-all duration-100 ease-in-out"
             >
               <BsInfoCircle className="lg:mt-1" />
-              <div className="flex justify-between w-64 sm:w-full">
+              <div className="flex justify-between w-64 sm:w-full lg:w-fit">
                 <div>About UMS</div>
                 {!about ? (
                   <IoMdAdd className="text-2xl lg:hidden" />
@@ -77,7 +75,7 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={about ? "block bg-white p-4" : "hidden"}>
+            <div className={about ? "block bg-white p-4 lg:absolute lg:drop-shadow-2xl shadow-inner lg:mr-4 p-6 lg:mt-5" : "hidden"}>
               <Info
                 title="About Us"
                 desc_one="UMS (University Management System) is a web based sytem that showcases how a university website works from a real life perspective"
@@ -105,7 +103,7 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={programs ? "block bg-white" : "hidden"}>
+            <div className={programs ? "block bg-white lg:absolute lg:drop-shadow-2xl shadow-inner p-8 lg:mt-5" : "hidden"}>
               <Info title="Programmes Offered" option={true} />
             </div>
           </main>
@@ -126,33 +124,13 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={enroll ? "block bg-white p-2" : "hidden"}>
+            <div className={enroll ? "block bg-white p-2 lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-8 lg:mr-6 lg:mt-5" : "hidden"}>
               <Info
                 title="Enroll Today"
                 desc_one="Our enrollment is always open for the first 100 students to apply.Then it will be closed until further notice."
                 button="Enroll Now"
+                enroll={true}
               />
-            </div>
-          </main>
-          <main>
-            <section
-              onClick={() => setNews(!news)}
-              onMouseEnter={() => setNews(true)}
-              onMouseLeave={() => setNews(false)}
-              className="flex gap-2 ml-3 pt-2 lg:hover:border-b-4 border-red-900 gap-1 cursor-pointer transition-all duration-100 ease-in-out"
-            >
-              <BsCalendar3Event className="lg:mt-1" />
-              <div className="flex justify-between w-64 sm:w-full">
-                <div>News/Events</div>
-                {!news ? (
-                  <IoMdAdd className="text-2xl lg:hidden" />
-                ) : (
-                  <AiOutlineMinus className="text-2xl lg:hidden" />
-                )}
-              </div>
-            </section>
-            <div className={news ? "block" : "hidden"}>
-              <Info title="News/Events" />
             </div>
           </main>
           <main>
@@ -172,7 +150,7 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={contact ? "block bg-white" : "hidden"}>
+            <div className={contact ? "block bg-white lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-3 lg:mr-2" : "hidden"}>
               <Info title="Contact Us!!" contact={true} />
             </div>
           </main>
@@ -193,8 +171,15 @@ export default function Navbar() {
                 )}
               </div>
             </section>
-            <div className={system ? "block" : "hidden"}>
-              <Info title="Our System" />
+            <div className={system ? "block bg-white p-6 lg:absolute lg:drop-shadow-2xl shadow-inner lg:p-10 lg:mr-48 lg:ml-96 lg:w-fit lg:left-0 lg:mt-5" : "hidden"}>
+              <Info
+                title="Our System"
+                desc_one="UMS is an easy to use platform.When you enroll you will go through a series of questions, then once you pass them you will be enrolled as a student.You can also choose the role of a lecture to see how it works."
+                title_two="Students Dashboard"
+                desc_two="In students dashboard you will be able to view your results and other useful things like the library and many more."
+                title_three="Lectures/Staff Dashboard"
+                desc_three="In this dashboard you will be able to see how lectures upload student's results and give them credits and status based on performance"
+              />
             </div>
           </main>
         </div>
