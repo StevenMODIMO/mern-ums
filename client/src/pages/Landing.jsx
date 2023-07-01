@@ -1,5 +1,7 @@
 export default function Landing() {
     return (
-        <main></main>
+        <main>
+            <h1>Landing Page</h1>
+        </main>
     )
 }

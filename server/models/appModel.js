@@ -66,7 +66,7 @@ studentSchema.statics.qualify = async function (email, grade) {
   }
   
   if (grade == "A" || grade == "B" || grade == "C") {
-    return { message: " You are Qualified" };
+    return { id: exists._id};
   } else {
     throw Error("You do not meet the requirements");
   }
