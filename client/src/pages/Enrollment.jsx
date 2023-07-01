@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom"
 import Registration from "../components/Registration";
 import Thankyou from "../components/Thankyou";
 import Admit from "../components/Admit";
@@ -34,6 +35,8 @@ export default function Enroll() {
       )}
 
       {registered && admit && qualified && <Thankyou />}
+
+      <NavLink to="/enroll-staff">Or, Enroll as a Lecturere</NavLink>
     </div>
   );
 }

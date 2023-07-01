@@ -13,6 +13,16 @@ const studentSchema = new mongoose.Schema({
   enrolled: { type: Boolean, default: false },
 });
 
+const lectureSchema = new mongoose.Schema({
+  first_name: String,
+  middle_name: String,
+  last_name: String,
+  level: String,
+  course_instructing: String,
+  email: String,
+  password: String,
+})
+
 studentSchema.statics.register = async function (
   first_name,
   middle_name,
@@ -95,24 +105,66 @@ studentSchema.statics.admit = async function (admission_no, email, course) {
   return admitted;
 };
 
-studentSchema.statics.login = async function (admission_no, password) {
-  if (!admission_no || !password) {
+lectureSchema.statics.register = async function (
+  first_name,
+  middle_name,
+  last_name,
+  email,
+  password
+) {
+  if (!first_name || !middle_name || !last_name || !email || !password) {
     throw Error("All fields must be filled");
   }
 
-  const user = await this.findOne({ admission_no });
-
-  if (!user) {
-    throw Error("Invalid Admission Number");
+  if (!validator.isEmail(email)) {
+    throw Error("Invalid Email");
   }
 
-  const match = await bcrypt.compare(password, user.password);
-
-  if (!match) {
-    throw Error("Incorrect Password");
+  if (!validator.isStrongPassword(password)) {
+    throw Error("Weak Password");
   }
 
+  const exists = await this.findOne({ email });
+
+  if (exists) {
+    throw Error("There is a user with this email");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+
+  const user = await this.create({
+    first_name,
+    middle_name,
+    last_name,
+    email,
+    password: hash,
+  });
   return user;
 };
 
+lectureSchema.statics.level = async function (email, level,course_instructing) {
+  if (!email || !level || !course_instructing) {
+    throw Error("All fields must be filled");
+  }
+  const exists = await this.findOne({ email });
+
+  if (!exists) {
+    throw Error("No such user,please register");
+  }
+
+  const admitted = await this.findOneAndUpdate(
+    { email: email },
+    {
+      
+      course_instructing,
+      level,
+    },
+    { new: true }
+  );
+
+  return admitted;
+};
+
 module.exports = mongoose.model("Student", studentSchema);
+module.exports = mongoose.model("Lecture", lectureSchema);

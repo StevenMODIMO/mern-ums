@@ -1,4 +1,5 @@
 const Student = require("../models/appModel");
+const Lecture = require("../models/appModel");
 const jwt = require("jsonwebtoken");
 
 const createToken = (_id) => {
@@ -15,9 +16,33 @@ const registerStudent = async (req, res) => {
       email,
       password
     );
-    const token = createToken(user._id);
-    const id = user.id;
     res.status(200).json({ user });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const registerLecture = async (req, res) => {
+  const { first_name, middle_name, last_name, email, password } = req.body;
+  try {
+    const user = await Lecture.register(
+      first_name,
+      middle_name,
+      last_name,
+      email,
+      password
+    );
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const admitLecture = async (req, res) => {
+  const { email, level,course_instructing,staff_id } = req.body;
+  try {
+    const admitted = await Lecture.level(email, level,course_instructing,staff_id);
+    res.status(200).json(admitted);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -43,20 +68,14 @@ const admitStudent = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
-  const { admission_no, password } = req.body;
-  try {
-    const user = await Student.login(admission_no, password);
-    const token = createToken(user._id);
-    res.status(200).json({ admission_no, token });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
+
+
+
 
 module.exports = {
   registerStudent,
   checkQualification,
   admitStudent,
-  loginUser,
+  registerLecture,
+  admitLecture,
 };

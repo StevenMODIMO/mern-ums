@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext"
 
-export default function Login() {
-  const [admission, setAdmission] = useState("");
+export default function LoginStaff() {
+  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const { user, dispatch } = useAuth()
@@ -10,18 +10,18 @@ export default function Login() {
   const handleSubmission = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/app/login", {
+    const response = await fetch("http://localhost:5000/api/app/login-staff", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ admission_no: admission, password }),
+      body: JSON.stringify({ id, password }),
     });
 
     const json = await response.json();
 
     if (response.ok) {
-      setAdmission("");
+        setId("");
       setPassword("");
       setError(null);
       localStorage.setItem("user", JSON.stringify(json));
@@ -29,7 +29,7 @@ export default function Login() {
     }
 
     if (!response.ok) {
-      setAdmission("");
+        setId("");
       setPassword("");
       setError(json.error);
     }
@@ -38,16 +38,16 @@ export default function Login() {
     <main>
       <div>
         <form onSubmit={handleSubmission} onFocus={() => setError(null)}>
-          <label>Admission No:</label>
+          <label>Staff Id:</label>
           <input
             type="text"
-            value={admission}
-            onChange={(e) => setAdmission(e.target.value)}
+            value={id}
+            onChange={(e) => setId(e.target.value)}
             className="border-2 border-red-900"
           />
           <label>Password:</label>
           <input
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="border-2 border-red-900"

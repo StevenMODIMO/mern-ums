@@ -1,12 +1,20 @@
-const { registerStudent,checkQualification,admitStudent, loginUser } = require("../controllers/appControllers")
-const router = require("express").Router()
+const {
+  registerStudent,
+  checkQualification,
+  admitStudent,
+  registerLecture,
+  admitLecture,
+} = require("../controllers/appControllers");
+const router = require("express").Router();
 
-router.post("/register", registerStudent)
+router.post("/register", registerStudent);
 
-router.post("/qualify",checkQualification)
+router.post("/qualify", checkQualification);
 
-router.post("/admit",admitStudent)
+router.post("/admit", admitStudent);
 
-router.post("/login", loginUser)
+router.post("/register-staff",registerLecture)
 
-module.exports = router
+router.post("/admit-staff",admitLecture)
+
+module.exports = router;
