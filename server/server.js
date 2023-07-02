@@ -5,7 +5,8 @@ const cors = require("cors")
 const mongoose = require("mongoose")
 const MONGO_URI=process.env.MONGO_URI
 const PORT=process.env.PORT
-const appRoutes = require("./routes/appRoutes")
+const studentRoutes = require("./routes/studentRoutes")
+const lectureRoutes = require("./routes/lectureRoutes")
 
 app.use(cors())
 app.use(express.json())
@@ -19,7 +20,8 @@ app.get("/",(req,res) =>{
 })
 
 // Api Routes
-app.use("/api/app", appRoutes)
+app.use("/api/app/student", studentRoutes)
+app.use("/api/app/lecture", lectureRoutes)
 
 mongoose.connect(MONGO_URI).then(() => {
     app.listen(PORT,() => {

@@ -11,7 +11,7 @@ export default function Admit({ onSuccess, id }) {
   const handleSubmission = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/app/admit", {
+    const response = await fetch("http://localhost:5000/api/app/student/admit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

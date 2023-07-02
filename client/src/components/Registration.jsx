@@ -10,7 +10,7 @@ export default function Registration({onSuccess,setRegistered}) {
 
   const handleSubmission = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/app/register", {
+    const response = await fetch("http://localhost:5000/api/app/student/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

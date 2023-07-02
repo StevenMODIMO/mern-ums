@@ -10,7 +10,7 @@ export default function RegisterLecture({onSuccess,setRegistered}) {
 
   const handleSubmission = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/app/register-staff", {
+    const response = await fetch("http://localhost:5000/api/app/lecture/register-staff", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

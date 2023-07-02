@@ -10,7 +10,7 @@ export default function LoginStaff() {
   const handleSubmission = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/app/login-staff", {
+    const response = await fetch("http://localhost:5000/api/app/lecture/login-staff", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -10,7 +10,7 @@ export default function AdmitLecture({ onSuccess,setId,nid }) {
   const handleSubmission = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/app/admit-staff", {
+    const response = await fetch("http://localhost:5000/api/app/lecture/admit-staff", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
