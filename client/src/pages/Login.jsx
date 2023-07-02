@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext"
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [admission, setAdmission] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const { user, dispatch } = useAuth()
+  const navigate = useNavigate()
 
   const handleSubmission = async (e) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ export default function Login() {
       setError(null);
       localStorage.setItem("user", JSON.stringify(json));
       dispatch({ type: "LOGIN", payload: json });
+      navigate("/role")
     }
 
     if (!response.ok) {
@@ -47,7 +50,7 @@ export default function Login() {
           />
           <label>Password:</label>
           <input
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="border-2 border-red-900"

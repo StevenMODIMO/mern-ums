@@ -11,6 +11,74 @@ const studentSchema = new mongoose.Schema({
   admission_no: String,
   course: String,
   enrolled: { type: Boolean, default: false },
+  modules: [
+    {
+      module1: {
+        semester_one: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+        semester_two: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+      },
+      module2: {
+        semester_one: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+        
+        semester_two: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+      },
+      module3: {
+        semester_one: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+        
+        semester_two: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+      },
+      module4: {
+        semester_one: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+        
+        semester_two: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+      },
+      module5: {
+        semester_one: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+        
+        semester_two: {
+          cat_one: { type: Number },
+          cat_two: { type: Number },
+          final: { type: Number },
+        },
+      },
+    },
+  ],
 });
 
 studentSchema.statics.register = async function (
@@ -61,12 +129,12 @@ studentSchema.statics.qualify = async function (email, grade) {
     throw Error("No such user,please register");
   }
 
-  if(exists.enrolled) {
-    return {error: "This user is already enrolled, please login"}
+  if (exists.enrolled) {
+    return { error: "This user is already enrolled, please login" };
   }
-  
+
   if (grade == "A" || grade == "B" || grade == "C") {
-    return { id: exists._id};
+    return { id: exists._id };
   } else {
     throw Error("You do not meet the requirements");
   }
@@ -95,26 +163,24 @@ studentSchema.statics.admit = async function (admission_no, email, course) {
   return admitted;
 };
 
-
-
-studentSchema.statics.login = async function (admission_no,password) {
-  if(!admission_no || !password) {
-    throw Error("Fields must not be empty.")
+studentSchema.statics.login = async function (admission_no, password) {
+  if (!admission_no || !password) {
+    throw Error("Fields must not be empty.");
   }
 
-  const user = await this.findOne({admission_no})
+  const user = await this.findOne({ admission_no });
 
-  if(!user) {
-    throw Error("Incorrect Admission Number")
+  if (!user) {
+    throw Error("Incorrect Admission Number");
   }
 
-  const match = await bcrypt.compare(password,user.password)
+  const match = await bcrypt.compare(password, user.password);
 
-  if(!match) {
-    throw Error("Incorrect Password.")
+  if (!match) {
+    throw Error("Incorrect Password.");
   }
 
-  return user
-}
+  return user;
+};
 
 module.exports = mongoose.model("Student", studentSchema);

@@ -52,9 +52,20 @@ const loginStudent = async (req, res) => {
   }
 };
 
+const getStudentInfo = async(req,res) => {
+  const { admission_no } = req.params
+  try {
+    const studentInfo = await Student.findOne({admission_no})
+    res.status(200).json(studentInfo)
+  } catch(error) {
+    res.status(400).json(error)
+  }
+}
+
 module.exports = {
   registerStudent,
   checkQualification,
   admitStudent,
-  loginStudent
+  loginStudent,
+  getStudentInfo
 };
